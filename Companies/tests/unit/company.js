@@ -1,24 +1,15 @@
-var dotenv = require('dotenv');
+var dotenv = require('dotenv').config({
+  path: './.test.env',
+});
 var mongoose = require('mongoose');
 var assert = require('assert');
-var server = require('../../server');
+//var server = require('../../server');
 var Company = require('../../models/company.model');
-
 var dbUri = 'mongodb+srv://' + process.env.databaseUsername + ':'
   + process.env.databasePassword + '@' + process.env.cluster + '/'
   + process.env.databaseName + '?retryWrites=true&w=majority';
 
-//var clearDB  = require('mocha-mongoose')(dbUri);
 
-// if (process.env.NODE_ENV === 'test') {
-//   dotenv.config({
-//     path: './.test.env',
-//   });
-// } else {
-//   dotenv.config({
-//     path: './.env',
-//   });
-// }
 
 
 describe('unit tests for company', function () {
@@ -28,6 +19,7 @@ describe('unit tests for company', function () {
     mongoose.set('useCreateIndex', true);
     mongoose.set('useUnifiedTopology', true);
     mongoose.connect(dbUri);
+    
     done();
   });
 
